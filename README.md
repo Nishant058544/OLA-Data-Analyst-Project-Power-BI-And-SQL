@@ -335,6 +335,9 @@ This project includes an `Ola DA Project SQL.sql` file containing all the SQL qu
 This file simplifies setting up the project and ensures all queries and views are executed in a single step.
 
 
+</details>
+
+---
 
 <details>
     <summary>Power BI 📈</summary>
@@ -479,3 +482,4 @@ To conduct a comprehensive analysis of OLA's ride data, focusing on key aspects 
 
 
 
+this is my friend readme file i want to change completely as my redeme file 
