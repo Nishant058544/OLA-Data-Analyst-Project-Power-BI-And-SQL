@@ -334,17 +334,7 @@ This project includes an `Ola DA Project SQL.sql` file containing all the SQL qu
 
 This file simplifies setting up the project and ensures all queries and views are executed in a single step.
 
-## File Details 📁
 
-- **File Name**: `Ola DA Project SQL.sql` [Download File](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/Ola%20DA%20Project%20SQL.sql)
-- **Size**: `4 KB`
-
-- **File Name**: `Bookings.csv` [Download File](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/Bookings.csv)
-- **Size**: `15.5 MB`
-
-</details>
-
----
 
 <details>
     <summary>Power BI 📈</summary>
@@ -486,5 +476,6 @@ To conduct a comprehensive analysis of OLA's ride data, focusing on key aspects 
 3. **Vehicle Type Performance 🚗**: Discover the most effective vehicle types.
 4. **Revenue Patterns 💸**: Track payment method usage and high-value customers.
 5. **Cancellation Analysis 🔄**: Pinpoint reasons for ride cancellations.
+
 
 
