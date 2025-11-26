@@ -1,386 +1,167 @@
-﻿# 🚖 OLA Data Analyst Project Power BI & SQL
+# 🚖 OLA Data Analyst Project – SQL & Power BI
 
-The OLA Data Analyst Project analyzes ride-booking data using SQL and Power BI to track ride volumes, customer behavior, and driver performance. It focuses on booking statuses, revenue breakdowns by payment method, and top customers. SQL queries are used to calculate ride statistics, and the final Power BI dashboard visualizes key data, including ride volumes, vehicle performance, and sales. The analysis helps optimize OLA's services by identifying trends and areas for improvement.
-
-## 🎥 Demo
-
-![Alt Text](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/Ola%20DA%20Project%20DEMO.gif)
-
-> [!NOTE]
-> Click the dropdown list below for more information on SQL or Power BI.
+This project presents a complete analysis of OLA ride-booking data using **SQL** and **Power BI**.  
+The goal is to understand ride performance, customer behavior, revenue trends, cancellation patterns, and rating insights.  
+The analysis provides actionable information that can help a ride-hailing business optimize its operations.
 
 ---
 
-<details>
-<summary>SQL 📊</summary>
+## 📊 Project Overview
 
-# 🚖 OLA Data Analyst Project SQL
+This project focuses on:
 
-## 📂 Introduction to the Database
+- Ride volume trends  
+- Booking status distribution  
+- Revenue contributions by payment methods  
+- Customer & driver rating patterns  
+- Reasons behind cancellations  
+- Vehicle-type performance  
+- Top customers by engagement  
 
-This project involves analyzing ride bookings data for a ride-hailing service, "OLA." The database contains various tables (e.g., `bookings`, `customers`, and `drivers`) that store information about ride bookings, customer ratings, driver ratings, vehicle types, payment methods, and more.
+The work is divided into two major components:
 
-The main objective of this project is to extract meaningful insights and statistics using SQL queries. This document showcases a set of queries to answer specific analytical questions about the business performance and customer behavior.
-
-### 🛠️ How the Database Works
-
-- **📊 Tables**: The database is primarily focused on the `bookings` table, which contains the following key columns:
-
-  - `Booking_ID`: Unique identifier for each ride.
-  - `Customer_ID`: ID of the customer who booked the ride.
-  - `Vehicle_Type`: Type of vehicle used (e.g., Prime Sedan, Auto, etc.).
-  - `Booking_Status`: Status of the ride (e.g., `Success`, `Cancelled by Customer`, etc.).
-  - `Ride_Distance`: Distance covered in the ride (in kilometers).
-  - `Payment_Method`: Mode of payment used for the ride (e.g., UPI, Card, Cash).
-  - `Driver_Ratings`: Ratings provided by customers to the drivers (out of 5).
-  - `Customer_Rating`: Ratings provided by drivers to the customers (out of 5).
-  - `Booking_Value`: Monetary value of the completed ride.
-  - `Incomplete_Rides`: A flag to indicate whether the ride was completed or not.
-  - `Incomplete_Rides_Reason`: If the ride was incomplete, this column stores the reason.
-
-- **🔍 Views**: This document includes SQL `CREATE VIEW` statements to predefine specific datasets and make querying simpler for repetitive tasks.
-
-- **📈 Key Insights**: Using SQL, we retrieve data that helps us answer questions such as:
-  - The top-performing customers.
-  - Average ratings and distances.
-  - Trends in cancellations by drivers and customers.
-  - The total revenue from successful rides.
+1. **SQL Analysis** – Querying & extracting insights  
+2. **Power BI Dashboard** – Visualization & storytelling  
 
 ---
 
-## 🏗️ Database Setup
+# 🔹 SQL ANALYSIS
 
+## 🛠 Database Structure
+
+The dataset contains key details per booking:
+
+- Booking ID  
+- Customer ID  
+- Vehicle type  
+- Payment method  
+- Ride distance  
+- Booking status  
+- Driver ratings  
+- Customer ratings  
+- Booking value  
+- Incomplete ride flags & reasons  
+
+These fields provide a deep understanding of ride behavior and business KPIs.
+
+---
+
+## 📌 Key SQL Queries
+
+### 1️⃣ Successful Rides  
 ```sql
-CREATE DATABASE Ola;
-USE Ola;
-```
-
-## 📂 Importing Data into MySQL Workbench
-
-To work with the database, we first need to import the data from the `bookings.csv` file into MySQL Workbench. Follow these steps:
-
-1. **Open MySQL Workbench**:
-
-   - Launch MySQL Workbench and connect to your database server.
-
-2. **Select the Database**:
-
-   - Use the `Ola` database by running:
-     ```sql
-     USE Ola;
-     ```
-
-3. **Go to the Import Section**:
-
-   - Click on the "Server" menu and select "Data Import."
-
-4. **Choose the CSV File**:
-
-   - In the "Import" tab, choose the `bookings.csv` file as the source.
-   - Ensure the "Import Data from File" option is selected.
-
-5. **Map the Table**:
-
-   - Select the destination table (`bookings`).
-   - Map the CSV columns to the corresponding table columns.
-
-6. **Run the Import**:
-
-   - Click on "Start Import."
-
-7. **Verify the Data**:
-   - After importing, verify the data using:
-     ```sql
-     SELECT * FROM bookings LIMIT 10;
-     ```
-
----
-
-## 📜 SQL Queries & Answers
-
-### 1️⃣ Retrieve all successful bookings:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW Successful_Bookings AS
 SELECT *
 FROM bookings
 WHERE Booking_Status = 'Success';
-```
-
-### 2️⃣ Find the average ride distance for each vehicle type:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW ride_distance_for_each_vehicle AS
+2️⃣ Average Ride Distance per Vehicle Type
+sql
+Copy code
 SELECT Vehicle_Type, AVG(Ride_Distance) AS avg_distance
 FROM bookings
 GROUP BY Vehicle_Type;
-```
-
-### 3️⃣ Get the total number of cancelled rides by customers:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW cancelled_rides_by_customers AS
+3️⃣ Total Customer-Cancelled Rides
+sql
+Copy code
 SELECT COUNT(*) AS total_cancelled_rides
 FROM bookings
-WHERE Booking_Status = 'cancelled by Customer';
-```
-
-### 4️⃣ List the top 5 customers who booked the highest number of rides:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW Top_5_Customers AS
-SELECT Customer_ID, COUNT(Booking_ID) AS total_rides
+WHERE Booking_Status = 'Cancelled by Customer';
+4️⃣ Top 5 Customers by Ride Count
+sql
+Copy code
+SELECT Customer_ID, COUNT(*) AS total_rides
 FROM bookings
 GROUP BY Customer_ID
 ORDER BY total_rides DESC
 LIMIT 5;
-```
-
-### 5️⃣ Get the number of rides cancelled by drivers due to personal and car-related issues:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW Rides_cancelled_by_Drivers_P_C_Issues AS
+5️⃣ Rides Cancelled by Drivers for Personal/Car Issues
+sql
+Copy code
 SELECT COUNT(*) AS cancelled_by_drivers
 FROM bookings
-WHERE cancelled_Rides_by_Driver = 'Personal & Car related issue';
-```
-
-### 6️⃣ Find the maximum and minimum driver ratings for Prime Sedan bookings:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW Max_Min_Driver_Rating AS
-SELECT MAX(Driver_Ratings) AS max_rating,
+WHERE Incomplete_Rides_Reason = 'Personal & Car related issue';
+6️⃣ Max & Min Driver Ratings for Prime Sedan
+sql
+Copy code
+SELECT MAX(Driver_Ratings) AS max_rating, 
        MIN(Driver_Ratings) AS min_rating
 FROM bookings
 WHERE Vehicle_Type = 'Prime Sedan';
-```
-
-### 7️⃣ Retrieve all rides where payment was made using UPI:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW UPI_Payment AS
+7️⃣ Rides Paid via UPI
+sql
+Copy code
 SELECT *
 FROM bookings
 WHERE Payment_Method = 'UPI';
-```
-
-### 8️⃣ Find the average customer rating per vehicle type:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW AVG_Cust_Rating AS
-SELECT Vehicle_Type, AVG(Customer_Rating) AS avg_customer_rating
+8️⃣ Average Customer Rating per Vehicle
+sql
+Copy code
+SELECT Vehicle_Type, AVG(Customer_Rating) AS avg_rating
 FROM bookings
 GROUP BY Vehicle_Type;
-```
-
-### 9️⃣ Calculate the total booking value of rides completed successfully:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW total_successful_ride_value AS
-SELECT SUM(Booking_Value) AS total_successful_ride_value
+9️⃣ Total Revenue from Successful Rides
+sql
+Copy code
+SELECT SUM(Booking_Value) AS total_revenue
 FROM bookings
 WHERE Booking_Status = 'Success';
-```
-
-### 🔟 List all incomplete rides along with the reason:
-
-**📝 Query:**
-
-```sql
-CREATE VIEW Incomplete_Rides_Reason AS
+🔟 Incomplete Rides with Their Reason
+sql
+Copy code
 SELECT Booking_ID, Incomplete_Rides_Reason
 FROM bookings
 WHERE Incomplete_Rides = 'Yes';
-```
+🔹 POWER BI ANALYSIS
+The Power BI dashboard presents an interactive view of the OLA dataset using charts, KPIs, and slicers.
 
-## 📥 Ola DA Project SQL.sql File
+📈 Key Metrics Displayed
+⭐ KPIs
+Total Sales / Revenue
 
-This project includes an `Ola DA Project SQL.sql` file containing all the SQL queries and view creation statements mentioned in this README. To use this file:
+Average Sales per Ride
 
-1. **Download the File**:
+Total Number of Rides
 
-   - Ensure you have the `Ola DA Project SQL.sql` file in your local directory.
+Average Customer Rating
 
-2. **Open in MySQL Workbench**:
+📊 Dashboard Sections
+1️⃣ Overall Ride Insights
+Ride volume over time
 
-   - Open MySQL Workbench and connect to your database server.
-   - Go to the "File" menu and select "Open SQL Script."
-   - Choose the `Ola DA Project SQL.sql` file.
+Booking success vs cancellations
 
-3. **Run the Script**:
+Daily performance patterns
 
-   - Click on the "Execute" button (lightning icon) to run the script.
+2️⃣ Vehicle Type Performance
+Top vehicle types by ride distance
 
-4. **Verify the Views**:
-   - Use queries such as `SELECT * FROM <view_name>` to verify that the views are created successfully.
+Rating comparison across vehicle categories
 
-This file simplifies setting up the project and ensures all queries and views are executed in a single step.
+3️⃣ Revenue Insights
+Revenue breakdown by payment method
 
+High-value customers
 
-</details>
+Distance vs revenue relationship
 
----
+4️⃣ Cancellation Analysis
+Customer cancellation reasons
 
-<details>
-    <summary>Power BI 📈</summary>
+Driver cancellation reasons
 
-# OLA Data Analysis in Power BI 📊
+Operational improvement areas
 
-This Power BI project provides a comprehensive analysis of OLA's operational and customer data, focusing on ride volume, customer ratings, revenue, and performance metrics. The analysis leverages dynamic dashboards, interactive charts, and key performance indicators (KPIs) to identify trends and insights.
+5️⃣ Rating Trends
+Distribution of driver ratings
 
-## ✨ Key Features
+Distribution of customer ratings
 
-📌 **Ride Volume Analysis**: Tracks ride volume over time, helping to identify peak demand periods.
+Detection of mismatches between the two
 
-📌 **Booking Status Breakdown**: Visualizes the proportion of completed, canceled, and pending rides.
-
-📌 **Top 5 Vehicle Types**: Highlights the most popular vehicle types based on ride distance.
-
-📌 **Cancellation Insights**: Analyzes reasons for ride cancellations to improve customer experience.
-
-📌 **Revenue Insights**: Breaks down revenue by payment methods to understand customer preferences.
-
-📌 **Top Customers**: Identifies the top 5 customers based on their total booking value.
-
-📌 **Driver Ratings**: Analyzes driver rating distribution to ensure service quality.
-
-📌 **Customer vs. Driver Ratings**: Compares customer and driver ratings to identify gaps in satisfaction.
-
----
-
-![App Screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20195004.png)
-
----
-
-## 🛠️ Tools Used:
-
-**Power BI**: For creating dashboards, visualizations, and interactive reports.
-
-**SQL**: For querying, aggregating, and preparing data for analysis.
-
-**Excel/CSV**: For preprocessing and cleaning raw data.
-
-## 🚀 Steps in Project
-
-✔️ Requirement Gathering / Business Requirements
-
-✔️ Data Extraction
-
-✔️ Data Walkthrough
-
-✔️ Data Cleaning
-
-✔️ Data Modeling
-
-✔️ DAX Calculations
-
-✔️ Dashboard Layout Design
-
-✔️ Chart Development and Formatting
-
-✔️ Dashboard / Report Development
-
-✔️ Insights Generation
-
-✔️ Report Presentation
-
-## 🧑‍💼 Business Requirement
-
-To conduct a comprehensive analysis of OLA's ride data, focusing on key aspects such as ride volume, booking status, and vehicle types. The analysis will also include customer and driver ratings, reasons for canceled rides, and revenue by payment method. Additionally, it will identify the top customers by total booking value and examine the distribution of ride distances per day. The goal is to provide actionable insights that can help optimize OLA's services and improve overall performance.
-
-## 📈 KPI’s Requirements
-
-**1. Total Sales:** The overall revenue generated from all items sold.
-
-**2. Average Sales:** The average revenue per sale.
-
-**3. Number of Items:** The total count of different items sold.
-
-**4. Average Rating:** The average customer rating from items sold.
-
-## 📊 Chart’s Requirements
-
-<ol>  
-<h3><li> Overall 📅</li></h3>  
-<ul>  
-  <li>Ride Volume Over Time: Visualize ride volume trends over time.</li>  
-  <li>Booking Status Breakdown: Display the distribution of completed, canceled, and pending bookings.</li>  
-  <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20195004.png"  />
-</div>
-</ul>
-
-<h3><li> Vehicle Type 🚗:</li></h3>  
-<ul>  
-  <li>Top 5 Vehicle Types by Ride Distance: Show the top 5 vehicle types based on ride distance.</li>  
-  <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20201113.png"  />
-</div>
-</ul>
-
-<h3><li> Revenue 💰:</li></h3>  
-<ul>  
-  <li>Revenue by Payment Method: Visualize total revenue generated by different payment methods.</li>  
-  <li>Top 5 Customers by Total Booking Value: Identify the top 5 customers with the highest total booking value.</li>  
-  <li>Ride Distance Distribution Per Day: Display the distribution of ride distances on a daily basis.</li> 
-  <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20201137.png"  />
-</div> 
-</ul>
-
-<h3><li> Cancellation 🚫:</li></h3>  
-<ul>  
-  <li>Cancelled Rides Reasons (Customer): Show the reasons behind canceled rides by customers.</li>  
-  <li>Cancelled Rides Reasons (Driver): Show the reasons behind canceled rides by drivers.</li>  
-  <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20201201.png"  />
-</div>
-</ul>
-
-<h3><li> Ratings 🌟:</li></h3>  
-<ul>  
-  <li>Driver Ratings: Display the distribution of ratings given to drivers.</li>  
-  <li>Customer Ratings: Display the distribution of ratings given by customers.</li>  
-  <br>
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <img src="https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/Screenshot%202024-12-15%20201233.png"  />
-</div>
-</ul>
-</ol>
-
-## Dashboard Insights
-
-### Key Insights 🔑:
-
-1. **Ride Volume Trends 📉**: Identify peak times and demand fluctuations.
-2. **Booking Status Insights 📋**: Understand the distribution of booking statuses.
-3. **Vehicle Type Performance 🚗**: Discover the most effective vehicle types.
-4. **Revenue Patterns 💸**: Track payment method usage and high-value customers.
-5. **Cancellation Analysis 🔄**: Pinpoint reasons for ride cancellations.
-
-
-
-this is my friend readme file i want to change completely as my redeme file 
-
+🔹 Workflow Followed
+✔ Data extraction
+✔ Data cleaning and transformation
+✔ SQL-based analysis
+✔ Data modeling in Power BI
+✔ DAX calculations
+✔ Dashboard creation
+✔ Insight generation
