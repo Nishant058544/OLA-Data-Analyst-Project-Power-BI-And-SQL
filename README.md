@@ -53,18 +53,24 @@ These fields provide a deep understanding of ride behavior and business KPIs.
 SELECT *
 FROM bookings
 WHERE Booking_Status = 'Success';
+
+
 2️⃣ Average Ride Distance per Vehicle Type
 sql
 Copy code
 SELECT Vehicle_Type, AVG(Ride_Distance) AS avg_distance
 FROM bookings
 GROUP BY Vehicle_Type;
+
+
 3️⃣ Total Customer-Cancelled Rides
 sql
 Copy code
 SELECT COUNT(*) AS total_cancelled_rides
 FROM bookings
 WHERE Booking_Status = 'Cancelled by Customer';
+
+
 4️⃣ Top 5 Customers by Ride Count
 sql
 Copy code
@@ -73,12 +79,16 @@ FROM bookings
 GROUP BY Customer_ID
 ORDER BY total_rides DESC
 LIMIT 5;
+
+
 5️⃣ Rides Cancelled by Drivers for Personal/Car Issues
 sql
 Copy code
 SELECT COUNT(*) AS cancelled_by_drivers
 FROM bookings
 WHERE Incomplete_Rides_Reason = 'Personal & Car related issue';
+
+
 6️⃣ Max & Min Driver Ratings for Prime Sedan
 sql
 Copy code
@@ -86,30 +96,40 @@ SELECT MAX(Driver_Ratings) AS max_rating,
        MIN(Driver_Ratings) AS min_rating
 FROM bookings
 WHERE Vehicle_Type = 'Prime Sedan';
+
+
 7️⃣ Rides Paid via UPI
 sql
 Copy code
 SELECT *
 FROM bookings
 WHERE Payment_Method = 'UPI';
+
+
 8️⃣ Average Customer Rating per Vehicle
 sql
 Copy code
 SELECT Vehicle_Type, AVG(Customer_Rating) AS avg_rating
 FROM bookings
 GROUP BY Vehicle_Type;
+
+
 9️⃣ Total Revenue from Successful Rides
 sql
 Copy code
 SELECT SUM(Booking_Value) AS total_revenue
 FROM bookings
 WHERE Booking_Status = 'Success';
+
+
 🔟 Incomplete Rides with Their Reason
 sql
 Copy code
 SELECT Booking_ID, Incomplete_Rides_Reason
 FROM bookings
 WHERE Incomplete_Rides = 'Yes';
+
+
 🔹 POWER BI ANALYSIS
 The Power BI dashboard presents an interactive view of the OLA dataset using charts, KPIs, and slicers.
 
@@ -165,3 +185,4 @@ Detection of mismatches between the two
 ✔ DAX calculations
 ✔ Dashboard creation
 ✔ Insight generation
+
