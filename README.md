@@ -25,6 +25,32 @@ The work is divided into two major components:
 
 ---
 
+## 📊 Power BI Dashboard Preview
+
+### 🟩 Overall Dashboard
+![Overall Dashboard](https://raw.githubusercontent.com/Nishant058544/OLA-Data-Analyst-Project-Power-BI-And-SQL/main/Screenshot%202025-11-26%20195913.png)
+
+---
+
+### 🚗 Vehicle Type Dashboard
+![Vehicle Type Dashboard](https://raw.githubusercontent.com/Nishant058544/OLA-Data-Analyst-Project-Power-BI-And-SQL/main/Screenshot%202025-11-26%20195931.png)
+
+---
+
+### 💰 Revenue Dashboard
+![Revenue Dashboard](https://raw.githubusercontent.com/Nishant058544/OLA-Data-Analyst-Project-Power-BI-And-SQL/main/Screenshot%202025-11-26%20195948.png)
+
+---
+
+### 🚫 Cancellation Dashboard
+![Cancellation Dashboard](https://raw.githubusercontent.com/Nishant058544/OLA-Data-Analyst-Project-Power-BI-And-SQL/main/Screenshot%202025-11-26%20200006.png)
+
+---
+
+### ⭐ Ratings Dashboard
+![Ratings Dashboard](https://raw.githubusercontent.com/Nishant058544/OLA-Data-Analyst-Project-Power-BI-And-SQL/main/Screenshot%202025-11-26%20200019.png)
+
+
 # 🔹 SQL ANALYSIS
 
 ## 🛠 Database Structure
@@ -185,4 +211,5 @@ Detection of mismatches between the two
 ✔ DAX calculations
 ✔ Dashboard creation
 ✔ Insight generation
+
 
