@@ -109,16 +109,6 @@ FROM bookings
 WHERE Booking_Status = 'Success';
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM Successful_Bookings;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20062720.png)
-
----
-
 ### 2️⃣ Find the average ride distance for each vehicle type:
 
 **📝 Query:**
@@ -130,16 +120,6 @@ FROM bookings
 GROUP BY Vehicle_Type;
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM ride_distance_for_each_vehicle;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20063354.png)
-
----
-
 ### 3️⃣ Get the total number of cancelled rides by customers:
 
 **📝 Query:**
@@ -150,16 +130,6 @@ SELECT COUNT(*) AS total_cancelled_rides
 FROM bookings
 WHERE Booking_Status = 'cancelled by Customer';
 ```
-
-**📊 Answer:**
-
-```sql
-SELECT * FROM cancelled_rides_by_customers;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20063653.png)
-
----
 
 ### 4️⃣ List the top 5 customers who booked the highest number of rides:
 
@@ -174,16 +144,6 @@ ORDER BY total_rides DESC
 LIMIT 5;
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM Top_5_Customers;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20063859.png)
-
----
-
 ### 5️⃣ Get the number of rides cancelled by drivers due to personal and car-related issues:
 
 **📝 Query:**
@@ -194,16 +154,6 @@ SELECT COUNT(*) AS cancelled_by_drivers
 FROM bookings
 WHERE cancelled_Rides_by_Driver = 'Personal & Car related issue';
 ```
-
-**📊 Answer:**
-
-```sql
-SELECT * FROM Rides_cancelled_by_Drivers_P_C_Issues;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20064122.png)
-
----
 
 ### 6️⃣ Find the maximum and minimum driver ratings for Prime Sedan bookings:
 
@@ -217,16 +167,6 @@ FROM bookings
 WHERE Vehicle_Type = 'Prime Sedan';
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM Max_Min_Driver_Rating;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20064314.png)
-
----
-
 ### 7️⃣ Retrieve all rides where payment was made using UPI:
 
 **📝 Query:**
@@ -237,16 +177,6 @@ SELECT *
 FROM bookings
 WHERE Payment_Method = 'UPI';
 ```
-
-**📊 Answer:**
-
-```sql
-SELECT * FROM UPI_Payment;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20064820.png)
-
----
 
 ### 8️⃣ Find the average customer rating per vehicle type:
 
@@ -259,16 +189,6 @@ FROM bookings
 GROUP BY Vehicle_Type;
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM AVG_Cust_Rating;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20064923.png)
-
----
-
 ### 9️⃣ Calculate the total booking value of rides completed successfully:
 
 **📝 Query:**
@@ -280,16 +200,6 @@ FROM bookings
 WHERE Booking_Status = 'Success';
 ```
 
-**📊 Answer:**
-
-```sql
-SELECT * FROM total_successful_ride_value;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20065052.png)
-
----
-
 ### 🔟 List all incomplete rides along with the reason:
 
 **📝 Query:**
@@ -300,16 +210,6 @@ SELECT Booking_ID, Incomplete_Rides_Reason
 FROM bookings
 WHERE Incomplete_Rides = 'Yes';
 ```
-
-**📊 Answer:**
-
-```sql
-SELECT * FROM Incomplete_Rides_Reason;
-```
-
-![Description of the screenshot](https://github.com/PrajwalGpy/OLA-Data-Analyst-Project-Power-BI-And-SQL/blob/main/images/SQL%20images/Screenshot%202024-12-16%20065216.png)
-
----
 
 ## 📥 Ola DA Project SQL.sql File
 
@@ -483,3 +383,4 @@ To conduct a comprehensive analysis of OLA's ride data, focusing on key aspects 
 
 
 this is my friend readme file i want to change completely as my redeme file 
+
